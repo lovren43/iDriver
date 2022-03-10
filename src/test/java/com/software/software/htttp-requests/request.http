@@ -1,0 +1,15 @@
+post http://localhost:8080/software/signUp/user?userName=Lovren&password=keefewk@@W1&birthday=cksdf&email=lkwfdf&phoneNumber=651ds
+post http://localhost:8080/software/signIn/user?userName=Lovren&password=keefewk@@W1
+post http://localhost:8080/software/signIn/user/requestRide?source=giza&destination=giza&numberOfPassingers=1&userId=1
+
+
+post http://localhost:8080/software/signUp/driver?DriverName=Adham&password=tstewr8L@fsdf&licenseNumber=errrewrerf&nationalId=test&email=test&availbleSets=1&phoneNumber=test&favArea=giza
+post http://localhost:8080/software/signIn/driver?userName=Adham&password=tstewr8L@fsdf
+post http://localhost:8080/software/signUp/driver?DriverName=kamal&password=tstewr8L@fsdf&licenseNumber=errrewrerf&nationalId=test&email=test&availbleSets=1&phoneNumber=test&favArea=cairo
+post http://localhost:8080/software/signIn/driver?userName=kamal&password=tstewr8L@fsdf
+post http://localhost:8080/software/signIn/driver/makeOffer?price=20&driverId=1&rideId=1
+get  http://localhost:8080/software/signIn/driver/showAvailbleRides?driverId=1
+
+post http://localhost:8080/software/signIn/admin?adminUserName=admin&adminPassword=admin
+get http://localhost:8080/software/signIn/admin/listPendingDrivers
+post http://localhost:8080/software/signIn/admin/approveDriver?ID=1

@@ -46,7 +46,7 @@ public class softwareApi {
         @RequestParam(name="numberOfPassingers")int numberOfPassingers,
         @RequestParam(name="userId")int userID,
         @RequestParam(name="destinationAreaId")int destinationAreaId){
-            userOperations.requestRide(sourceAreaId, numberOfPassingers,userID,destinationAreaId);
+            userOperations.requestRide(destinationAreaId,sourceAreaId, numberOfPassingers,userID);
         }
     
     @PostMapping ("/signIn/user/requestRide/cancelRideRequest") 
@@ -132,29 +132,24 @@ public class softwareApi {
 
     @GetMapping("/signIn/admin/listPendingDrivers")
     public ArrayList<String> listPendingDrivers(){
-        //JsonArray pending = gson.toJsonTree(Admin.listPendingDrivers()).getAsJsonArray();
-        //return pending ;
         return Admin.listPendingDrivers();
     }
  
     @PostMapping("/signIn/admin/approveDriver")
-    public void approveDriver(@RequestParam (name="ID")int id){
-        Admin.approveDriver(id);
+    public void approveDriver(@RequestParam (name="driverId")int driverId){
+        Admin.approveDriver(driverId);
     }
 
       @PostMapping("/signIn/admin/suspend/user")
-    public void suspendUser(@RequestParam (name="ID")int id){
-        Admin.suspendUser(id);
+    public void suspendUser(@RequestParam (name="userId")int userId){
+        Admin.suspendUser(userId);
     }
     @PostMapping("/signIn/admin/suspend/driver")
-    public void suspendDriver(@RequestParam (name="ID")int id){
-        Admin.suspendDriver(id);
+    public void suspendDriver(@RequestParam (name="driverId")int driverId){
+        Admin.suspendDriver(driverId);
     }
     @GetMapping ("/signIn/admin/showEvents")
     public String getEvents(@RequestParam(name="rideId")int rideId){
-        //JsonArray events = gson.toJsonTree(Admin.getEvents(rideId)).getAsJsonArray();
-        //return events;
         return Admin.getEvents(rideId);
     }
-     
 }

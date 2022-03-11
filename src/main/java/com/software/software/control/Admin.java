@@ -17,8 +17,8 @@ public class Admin {
     private adminDataBase adminDataBase=DataBase.getInstance();
     private static String userName="admin";
     private static String password="admin";
-    public static boolean signIn(String Name,String pass){
-        if(userName.equalsIgnoreCase(Name)&&password.equalsIgnoreCase(pass)){
+    public static boolean signIn(String name,String pass){
+        if(userName.equals(name) && password.equals(pass)){
             return true;
         }
         else{

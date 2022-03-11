@@ -88,8 +88,6 @@ public class softwareApi {
         @RequestParam(name="favAreaId") int favAreaId){
             return Driver.signUp(userName, password, licensNumber, nationalId, email, birthday, availbleSets, phoneNumber, rideDataBase.getAreaById(favAreaId));
         }
-    
-
 
     @PostMapping("/signIn/driver")
     public boolean DriverSignIn(
@@ -121,14 +119,12 @@ public class softwareApi {
         return driverDataBase.getDriverRates(id);
     }
 
-
     @PostMapping("/signIn/admin")
     public boolean adminSignIn(
         @RequestParam(name="adminUserName") String adminUserName,
         @RequestParam(name="adminPassword") String adminPassword){
             return Admin.signIn(adminUserName, adminPassword);
         }
-
 
     @GetMapping("/signIn/admin/listPendingDrivers")
     public ArrayList<String> listPendingDrivers(){

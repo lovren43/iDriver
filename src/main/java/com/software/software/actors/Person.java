@@ -19,7 +19,7 @@ public abstract class Person {
         return personInformation.setPhoneNumber(phoneNumber);
     }
     public boolean signIn(String password){
-        if (this.personInformation.getPassword()==password){
+        if (this.personInformation.getPassword().equals(password)){
             return true;
         }
         else{

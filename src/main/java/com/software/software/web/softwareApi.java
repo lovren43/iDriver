@@ -1,14 +1,11 @@
 package com.software.software.web;
 import java.util.ArrayList;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.software.software.Data.DataBase;
 import com.software.software.Data.driverDataBase;
 import com.software.software.Data.rideDataBase;
 import com.software.software.Data.userDataBase;
 import com.software.software.actors.Driver;
 import com.software.software.actors.Role;
-import com.software.software.actors.Status;
 import com.software.software.actors.User;
 import com.software.software.control.Admin;
 import com.software.software.operations.driverOperations;
@@ -25,8 +22,7 @@ public class softwareApi {
     userDataBase userDataBase=DataBase.getInstance();
     rideDataBase rideDataBase=DataBase.getInstance();
     driverDataBase driverDataBase=DataBase.getInstance();
-    ////////////////////User API///////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////
+    
     @PostMapping("/signUp/user")
     public boolean userSignUp(
         @RequestParam(name="userName") String userName,
@@ -46,15 +42,17 @@ public class softwareApi {
 
     @PostMapping ("/signIn/user/requestRide")
     public void requestRide(
-        @RequestParam(name="source")String source,
-        @RequestParam(name="destination")String destination,
+        @RequestParam(name="sourceAreaId")int sourceAreaId,
         @RequestParam(name="numberOfPassingers")int numberOfPassingers,
         @RequestParam(name="userId")int userID,
         @RequestParam(name="destinationAreaId")int destinationAreaId){
-            userOperations.requestRide(source, destination, numberOfPassingers,userID,destinationAreaId);
+            userOperations.requestRide(sourceAreaId, numberOfPassingers,userID,destinationAreaId);
         }
     
-    
+    @PostMapping ("/signIn/user/requestRide/cancelRideRequest") 
+    public void cancelRideRequest(@RequestParam(name="rideId")int rideId){
+        userOperations.cancelRideRequest(rideId);
+    }
 
     @GetMapping("/signIn/user/requestRide/getOffers")
     public ArrayList<String> getOffers(@RequestParam (name="rideId")int rideId){
@@ -124,8 +122,6 @@ public class softwareApi {
     }
 
 
-    //////////////////////////////////////////////////////Admin Api/////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @PostMapping("/signIn/admin")
     public boolean adminSignIn(
         @RequestParam(name="adminUserName") String adminUserName,

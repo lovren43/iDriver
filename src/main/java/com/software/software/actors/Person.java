@@ -2,6 +2,7 @@ package com.software.software.actors;
 
 public abstract class Person {
     private personInfo personInformation;
+    
     public personInfo getPersonInfo() {
         return this.personInformation;
     }

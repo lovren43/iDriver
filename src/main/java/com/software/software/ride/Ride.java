@@ -4,17 +4,20 @@ package com.software.software.ride;
 import java.util.ArrayList;
 
 import com.software.software.Data.DataBase;
+import com.software.software.Data.rideDataBase;
 import com.software.software.Data.userDataBase;
 import com.software.software.Discounts.ridePrice;
+import com.software.software.Zone.area;
 import com.software.software.actors.Driver;
 import com.software.software.actors.Person;
 import com.software.software.actors.User;
 
 public class Ride implements ridePrice {
     userDataBase DB=DataBase.getInstance();
+    rideDataBase rideDataBase=DataBase.getInstance();
+    private area destinationArea=new area();
+    private area sourcArea=new area();
     private int rideID=0;
-    private String Source;
-    private String Destination;
     private Person user;
     private Driver driver;
     private int numberOfPassengers;
@@ -22,17 +25,33 @@ public class Ride implements ridePrice {
     private int Rate;
     private static int rideCounter=0;
     private ArrayList<event> rideEvents=new ArrayList<event>();
-    public Ride(String destination,String source,int userId, int numOfPassingers){
+    public Ride(int destinationAreaId,int sourceAreaId,int userId, int numOfPassingers){
         setRideId();
-        Destination=destination;
-        Source=source;
+        destinationArea=rideDataBase.getAreaById(destinationAreaId);
+        sourcArea=rideDataBase.getAreaById(sourceAreaId);
         this.user=DB.getUserById(userId);
         this.numberOfPassengers=numOfPassingers;
 
     }
+    
     private  void setRideId(){
         rideCounter++;
         rideID=rideCounter;
+    }
+    public area getDestinationArea() {
+        return destinationArea;
+    }
+
+    public void setDestinationArea(area destinationArea) {
+        this.destinationArea = destinationArea;
+    }
+
+    public area getSourcArea() {
+        return sourcArea;
+    }
+
+    public void setSourcArea(area sourcArea) {
+        this.sourcArea = sourcArea;
     }
     public int getRideId(){
         return rideID;
@@ -61,18 +80,6 @@ public class Ride implements ridePrice {
     public void setDriver(Driver driver) {
         this.driver = driver;
     }
-    public String getSource() {
-        return Source;
-    }
-    public void setSource(String source) {
-        Source = source;
-    }
-    public String getDestination() {
-        return Destination;
-    }
-    public void setDestination(String destination) {
-        Destination = destination;
-    }
     public int getNumberOfPassenger() {
         return this.numberOfPassengers;
     }
@@ -89,8 +96,8 @@ public class Ride implements ridePrice {
     @Override
     public String toString() {
         return
-                "Source='" + Source + '\'' +
-                        ", Destination='" + Destination + '\'' +
+                "Source='" + sourcArea.getAreaName() + '\'' +
+                        ", Destination='" + destinationArea.getAreaName() + '\'' +
                         ", user=" + user.getPersonInfo().getUserName() +
                         ", driver=" + driver.getPersonInfo().getUserName()+
                         ", price=" + price +

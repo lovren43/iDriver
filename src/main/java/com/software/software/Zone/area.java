@@ -1,8 +1,6 @@
 package com.software.software.Zone;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import com.software.software.actors.Driver;
 import com.software.software.ride.Ride;
 
@@ -29,7 +27,14 @@ public class area implements Areas {
     }
     public void notifyDrivers(Ride ride){
         for (Map.Entry<Integer,Driver>driver:drivers.entrySet()){
-            driver.getValue().update(ride);
+            if (driver.getValue().getAvailbleSets()==ride.getNumberOfPassenger()){
+                driver.getValue().update(ride);
+            }
+        }
+    }
+    public void removeAreaRideRequest(int rideId){
+        for (Map.Entry<Integer,Driver>driver:drivers.entrySet()){
+            driver.getValue().removeAvailbleRide(rideId);
         }
     }
     public void addAreaRideRequest(Ride ride){

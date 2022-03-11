@@ -100,6 +100,9 @@ public class Driver extends Person implements Observer {
             return false;
         }
      }
+     public void removeAvailbleRide(int rideId){
+         availbleRide.remove(rideId);
+     }
 
     public String toString() {
         String var10000 = this.getPersonInfo().getUserName();

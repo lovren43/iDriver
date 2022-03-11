@@ -30,6 +30,7 @@ public class User extends Person {
             return false;
         }
     }
+   
 
     public String toString() {
         String var10000 = this.getPersonInfo().getUserName();

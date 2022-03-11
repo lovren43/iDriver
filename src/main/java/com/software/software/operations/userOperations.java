@@ -7,8 +7,8 @@ import com.software.software.ride.event;
 public class userOperations {
     static rideDataBase rideDataBase=DataBase.getInstance();
 
-    public static void requestRide(String source,String destination,int numOfPassingers,int userId,int destinationAreaId) {
-        Ride ride = new Ride(destination, source,(userId), numOfPassingers);
+    public static void requestRide(int destinationAreaId,int sourceAreaId,int numOfPassingers,int userId) {
+        Ride ride = new Ride( destinationAreaId, sourceAreaId,(userId), numOfPassingers);
         rideDataBase.getAreaById(destinationAreaId).addAreaRideRequest(ride);
         rideDataBase.addRideRequest(ride); 
     }
@@ -22,5 +22,8 @@ public class userOperations {
                 break;
             }
         };
+    }
+    public static void cancelRideRequest(int rideId){
+        rideDataBase.getRideById(rideId).getDestinationArea().removeAreaRideRequest(rideId);
     }
 }

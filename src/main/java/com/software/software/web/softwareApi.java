@@ -38,7 +38,7 @@ public class softwareApi {
     public boolean UserSignIn(
         @RequestParam(name="userName") String userName,
         @RequestParam(name="password") String password ){
-            return userDataBase.getUserByUserName(userName).signIn(password);
+            return Person.signIn(userName, password);
         }
 
     @PostMapping ("/signIn/user/requestRide")

@@ -1,10 +1,7 @@
 package com.software.software.actors;
-import com.software.software.Data.DataBase;
-import com.software.software.Data.userDataBase;
 import com.software.software.Validation.Validation;
 
 public class User extends Person {
-    static userDataBase userDataBase=DataBase.getInstance();
     public static int counter=0;
     int userId;
     public User(String birthday,String userName,String phoneNumber,String email, String password,Role role) {

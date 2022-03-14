@@ -1,4 +1,6 @@
 package com.software.software.operations;
+import java.util.ArrayList;
+
 import com.software.software.Data.DataBase;
 import com.software.software.Data.rideDataBase;
 import com.software.software.ride.Ride;
@@ -12,7 +14,9 @@ public class userOperations {
         rideDataBase.getAreaById(destinationAreaId).addAreaRideRequest(ride);
         rideDataBase.addRideRequest(ride); 
     }
-
+    public static ArrayList<Ride> getOffers(int rideId){
+        return rideDataBase.getOffers(rideId);
+    }
     public static void acceptOffer(int rideId,int driverId) {
         for(int i=0; i<rideDataBase.getOffers(rideId).size(); i++){
             if (rideDataBase.getOffers(rideId).get(i).getDriver().getDriverId()==driverId){

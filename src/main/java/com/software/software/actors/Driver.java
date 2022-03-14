@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.software.software.Data.DataBase;
-import com.software.software.Data.driverDataBase;
 import com.software.software.Data.rideDataBase;
 import com.software.software.Validation.Validation;
 import com.software.software.Zone.Areas;
@@ -12,7 +11,6 @@ import com.software.software.Zone.area;
 import com.software.software.ride.Ride;
 
 public class Driver extends Person implements Observer {
-    private static driverDataBase driverDataBase=DataBase.getInstance();
     private rideDataBase rideDataBase=DataBase.getInstance();
     private int driverID;
     private int nationalId;
@@ -103,6 +101,9 @@ public class Driver extends Person implements Observer {
      public void removeAvailbleRide(int rideId){
          availbleRide.remove(rideId);
      }
+    //  public static boolean signIn(String userName,String password){
+    //      return driverDataBase.getDriverByUserName(userName).getPersonInfo().getPassword().equals(password);
+    //  }
 
     public String toString() {
         String var10000 = this.getPersonInfo().getUserName();

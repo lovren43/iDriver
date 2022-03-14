@@ -5,6 +5,7 @@ import com.software.software.Data.driverDataBase;
 import com.software.software.Data.rideDataBase;
 import com.software.software.Data.userDataBase;
 import com.software.software.actors.Driver;
+import com.software.software.actors.Person;
 import com.software.software.actors.Role;
 import com.software.software.actors.User;
 import com.software.software.control.Admin;
@@ -48,19 +49,18 @@ public class softwareApi {
         @RequestParam(name="destinationAreaId")int destinationAreaId){
             userOperations.requestRide(destinationAreaId,sourceAreaId, numberOfPassingers,userID);
         }
-    
-    @PostMapping ("/signIn/user/requestRide/cancelRideRequest") 
-    public void cancelRideRequest(@RequestParam(name="rideId")int rideId){
-        userOperations.cancelRideRequest(rideId);
-    }
-
     @GetMapping("/signIn/user/requestRide/getOffers")
     public ArrayList<String> getOffers(@RequestParam (name="rideId")int rideId){
         ArrayList<String> offers=new ArrayList<String>();
-        for (int i=0; i<rideDataBase.getOffers(rideId).size(); i++){
-            offers.add(rideDataBase.getOffers(rideId).get(i).getDriver().getDriverId()+" "+rideDataBase.getOffers(rideId).get(i).getPrice());
+        for (int i=0; i<userOperations.getOffers(rideId).size(); i++){
+             offers.add(userOperations.getOffers(rideId).get(i).toString());
         }
         return offers;
+    }
+
+    @PostMapping ("/signIn/user/requestRide/cancelRideRequest") 
+    public void cancelRideRequest(@RequestParam(name="rideId")int rideId){
+        userOperations.cancelRideRequest(rideId);
     }
     @PostMapping("/signIn/user/requestRide/getOffers/acceptOffer")
     public void acceptOffer(
@@ -93,7 +93,7 @@ public class softwareApi {
     public boolean DriverSignIn(
         @RequestParam(name="userName") String userName,
         @RequestParam(name="password") String password ){
-            return driverDataBase.getDriverByUserName(userName).signIn(password);
+            return Person.signIn(userName, password);
         }
 
     @GetMapping("/signIn/driver/showAvailbleRides")

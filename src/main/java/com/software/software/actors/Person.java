@@ -1,6 +1,12 @@
 package com.software.software.actors;
 
+import com.software.software.Data.DataBase;
+import com.software.software.Data.driverDataBase;
+import com.software.software.Data.userDataBase;
+
 public abstract class Person {
+    static driverDataBase driverDataBase=DataBase.getInstance();
+    static userDataBase userDataBase=DataBase.getInstance();
     private personInfo personInformation;
     
     public personInfo getPersonInfo() {
@@ -18,9 +24,14 @@ public abstract class Person {
     public boolean changePhoneNumber(String phoneNumber){
         return personInformation.setPhoneNumber(phoneNumber);
     }
-    public boolean signIn(String password){
-        if (this.personInformation.getPassword().equals(password)){
-            return true;
+    public static boolean signIn(String userName,String password){
+        Person person=driverDataBase.getDriverByUserName(userName);
+        if (person!=null){
+            return person.getPersonInfo().getPassword().equals(password);
+        }
+        person =userDataBase.getUserByUserName(userName);
+        if (person!=null){
+            return person.getPersonInfo().getPassword().equals(password);
         }
         else{
             return false;

@@ -101,9 +101,6 @@ public class Driver extends Person implements Observer {
      public void removeAvailbleRide(int rideId){
          availbleRide.remove(rideId);
      }
-    //  public static boolean signIn(String userName,String password){
-    //      return driverDataBase.getDriverByUserName(userName).getPersonInfo().getPassword().equals(password);
-    //  }
 
     public String toString() {
         String var10000 = this.getPersonInfo().getUserName();
